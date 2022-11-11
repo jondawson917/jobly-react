@@ -1,0 +1,21 @@
+.main {
+  width: 100vw;
+  text-align: center;
+  
+  height: auto; /* router view - navbar height */
+  
+  color: black;
+}
+
+
+section {
+  display: inline-block;
+  margin-top: 50px;
+}
+
+.searchform {
+  margin-bottom: 15px;
+}
+img {
+  position: absolute;
+}
