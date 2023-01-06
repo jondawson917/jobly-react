@@ -25,7 +25,9 @@ class JoblyApi {
         ? data
         : {};
 
-        
+        console.log("headers:", headers);
+        console.log("params:", params);
+        console.log("url:", url);
     try {
       return (await axios({ url, method, data, params, headers })).data;
     } catch (err) {

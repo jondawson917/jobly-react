@@ -9,7 +9,7 @@ import {
     ListGroupItem, Button
   } from "reactstrap";
 
-  const jobCard = ({id, title, salary, equity, companyName}) => {
+  const JobCard = ({id, title, salary, equity, companyName}) => {
     const { jobApplication, alreadyApplied} = useContext(UserContext);
     const [applied, setApplied] = useState();
 
@@ -42,4 +42,4 @@ import {
       </Card></>)
   }
 
-export default jobCard;
+export default JobCard;
