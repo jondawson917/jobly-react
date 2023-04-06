@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 
 import SearchForm from "./SearchForm";
-import JoblyApi from "../backend/api/api";
+import API from "../api/api";
 import JobDetails from "./JobDetails";
 
 
@@ -12,7 +12,7 @@ function JobList() {
   }, []);
 
   async function search(title) {
-    let jobs = await JoblyApi.getJobs(title);
+    let jobs = await API.getJobs(title);
     
     setJobs(jobs); 
   }

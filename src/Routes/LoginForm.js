@@ -14,7 +14,7 @@ function LoginForm({ login }) {
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     let result = await login(formData);
-    console.log(result)
+    console.log("Result", result);
     if (!result.token) {
       alert("Couldn't login successfully");
     } 

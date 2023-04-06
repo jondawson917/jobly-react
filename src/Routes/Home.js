@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { Card, CardBody, CardTitle } from "reactstrap";
-
+import "./Home.css"
 function Home() {
   
   return (
-    <main>
+    <main >
       <section className="col-md-8">
-        <Card>
+        <Card style={{background: 'aliceblue'}}>
           <CardBody className="text-center">
             <CardTitle>
-              <h2 className="font-weight-bold">
+              <h2 className="font-weight-bold" style={{color: 'black'}}>
                 Welcome to $inkedIn! $ink into getting more experience!
               </h2>
             </CardTitle>

@@ -17,7 +17,7 @@ const SignupForm = ({ signUp }) => {
     evt.preventDefault();
     let result = await signUp(formData);
     if (!result.token) {
-      alert("Couldn't create new user");
+      alert("Couldn't create new user   ");
     }
     history.push("/jobs");
   };

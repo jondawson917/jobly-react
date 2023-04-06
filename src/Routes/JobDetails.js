@@ -1,13 +1,5 @@
-import React, {useContext, useState, useEffect} from "react";
-import UserContext from "../UserContext";
-import {
-  Card,
-  CardBody,
-  CardTitle,
-  CardText,
-  ListGroup,
-  ListGroupItem,
-} from "reactstrap";
+import React from "react";
+
 import "./JobDetails.css"
 import JobCard from "./JobCard";
 function JobDetails({ jobs }) {

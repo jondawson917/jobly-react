@@ -9,9 +9,9 @@
   background-color: #101010d1;
   color: #f0f2f5;
   border: 12 + px solid rgba(16, 16, 16, 0.63);
-
+left: 20%;
   box-sizing: border-box;
-  max-width: max-content;
+  max-width:fit-content;
   font-family: 'Times New Roman';
 }
 

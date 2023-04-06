@@ -10,8 +10,8 @@ body {
   overflow:auto;
   display: flex;
   justify-content: initial;
-  background: crimson;
-  background-size: cover;
+  background-image: url("./jobsearch.jpg");
+  background-size:cover ;
 }
 
 code {

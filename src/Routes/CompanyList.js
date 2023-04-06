@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 
 import SearchForm from "./SearchForm";
-import JoblyApi from "../backend/api/api";
+import API from "../api/api";
 import CompanyDetails from "./CompanyDetails";
 
 function CompanyList() {
@@ -12,7 +12,7 @@ function CompanyList() {
   }, []);
 
   async function search(name) {
-    let companies = await JoblyApi.getCompanies(name);
+    let companies = await API.getCompanies(name);
     setCompanies(companies);
     
   }

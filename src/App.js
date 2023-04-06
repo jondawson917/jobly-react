@@ -1,54 +1,51 @@
 import React, { useState, useEffect } from "react";
-import Routes from "./Routes";
-import { decodeToken } from "./backend/helpers/tokens";
+import Routes from "./Routes/Routes";
 import useLocalStorage from "./hooks/useLocalStorage";
-import JoblyApi from "./backend/api/api";
+import API from "./api/api";
 import UserContext from "./UserContext";
 import "./App.css";
+const jwt = require("jsonwebtoken")
 
-const DEFAULT_TOKEN =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZ" +
-    "SI6InRlc3R1c2VyIiwiaXNBZG1pbiI6ZmFsc2UsImlhdCI6MTU5ODE1OTI1OX0." +
-    "FtrMwBQwe6Ue-glIFgz_Nf8XxRT2YecFCiSpYL0fCXc";
 function App() {
   
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [token, setToken] = useLocalStorage("token", DEFAULT_TOKEN);
-  const [currentUser, setCurrentUser] = useState(null);
-  /*Unfinished setting applications */
+  const [isLoading, setIsLoading] = useState(true);
+  const [token, setToken] = useLocalStorage("token", "");
+  const [currentUser, setCurrentUser] = useState({});
+  
   const [applicationIds, setApplicationIds] = useState(new Set());
 
   useEffect(
     function loadUser() {
       async function getCurrentUser() {
-        if (token) {
+        if (token !== 'null') {
           try {
-            let { username } = decodeToken(token);
+            API.token = token;
+            let { username } = jwt.decode(token);
             console.log(username);
-            JoblyApi.token = token;
-            let user = await getUser(username);
-            setApplicationIds(new Set(user.applications));
+            
+            let user = await API.getUserInfo(username);
+            // user.applications ? setApplicationIds(new Set(user.applications)) : setApplicationIds(new Set());
 
-            setCurrentUser(username);
-            console.log(applicationIds);
+            setCurrentUser(user);
+            
           } catch (e) {
             console.log(e);
             setCurrentUser(null);
-            setIsLoading(false);
+            
           }
         }
-        setIsLoading(true);
+        setIsLoading(false);
       }
       getCurrentUser();
-      setIsLoading(false);
+      
     },
-    [token]
+    [token, isLoading]
   );
 
   const newUser = async (signUpData) => {
     try {
-      let res = await JoblyApi.register(signUpData);
+      let res = await API.register(signUpData);
       setToken(res.token);
 
       setCurrentUser(signUpData);
@@ -60,9 +57,10 @@ function App() {
 
   const login = async (loginData) => {
     try {
-      let res = await JoblyApi.login(loginData);
-      setToken(res.token);
-
+      let res = await API.login(loginData);
+      
+      setToken(res.data.token);
+      console.log("logindata", loginData)
       setCurrentUser(loginData);
 
       return res;
@@ -72,13 +70,13 @@ function App() {
   };
 
   const getUser = async (username) => {
-    let res = await JoblyApi.getUserInfo(username);
+    let res = await API.getUserInfo(username);
 
     return res.user;
   };
 
   const updateUser = async (username, data) => {
-    let res = await JoblyApi.updateUserInfo(currentUser, data);
+    let res = await API.updateUserInfo(currentUser, data);
     return res.user;
   };
 
@@ -90,7 +88,7 @@ function App() {
   const jobApplication = (id) => {
     if (currentUser) {
       if(alreadyApplied(id)) return;
-      let res = JoblyApi.applyToJob(currentUser, id);
+      let res = API.applyToJob(currentUser, id);
       setApplicationIds(new Set([...applicationIds, id]));
       console.log(res);
       return res;
@@ -102,9 +100,9 @@ function App() {
     setToken(null);
   };
 
-  // if (isLoading) {
-  //   return <h1>Page Loading </h1>;
-  // }
+  if (isLoading) {
+    return <h1>Page Loading </h1>;
+  }
   return (
     <div className="main">
       <UserContext.Provider

@@ -39,7 +39,7 @@ function Profile() {
       }
       retrieveUserInfo();
     },
-    [currentUser]
+    [currentUser, getUser]
   );
 
   return (

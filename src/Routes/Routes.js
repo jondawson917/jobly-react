@@ -1,16 +1,16 @@
 import React from "react";
 import { Route, Switch, Redirect, BrowserRouter } from "react-router-dom";
 import Home from "./Home";
-import Profile from "./Routes/Profile";
-import LoginForm from "./Routes/LoginForm";
-import SignupForm from "./Routes/SignupForm";
-import CompanyList from "./Routes/CompanyList";
-import CompanyDetails from "./Routes/CompanyDetails";
-import JobList from "./Routes/JobList";
+import Profile from "./Profile";
+import LoginForm from "./LoginForm";
+import SignupForm from "./SignupForm";
+import CompanyList from "./CompanyList";
+import CompanyDetails from "./CompanyDetails";
+import JobList from "./JobList";
 
 import PrivateRoute from "./PrivateRoute"
-import NavBar from "./NavBar";
-import "./App.css";
+import NavBar from "../NavBar";
+import "../App.css";
 
 function Routes(props) {
   const {login, signUp, logout} = props;
